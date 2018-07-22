@@ -17,6 +17,7 @@
 		1670FD33210516D1004F8B38 /* UIColor+XKCDViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD32210516D1004F8B38 /* UIColor+XKCDViewer.swift */; };
 		1670FD35210516DE004F8B38 /* UIFont+XKCDViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD34210516DE004F8B38 /* UIFont+XKCDViewer.swift */; };
 		1670FD37210516F2004F8B38 /* XKCDComic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD36210516F2004F8B38 /* XKCDComic.swift */; };
+		1670FD3B21051CC7004F8B38 /* XKCDAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD3A21051CC7004F8B38 /* XKCDAPIManager.swift */; };
 		2F0293EB6E0CACE69DFF94F2 /* Pods_XKCDViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A7B3120530143AE33F3301 /* Pods_XKCDViewerTests.framework */; };
 		CC3706D356B01EEF43981966 /* Pods_XKCDViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA761E7F139D4D80EEB3AC /* Pods_XKCDViewerUITests.framework */; };
 		F53979D7DE50E97D99C72A01 /* Pods_XKCDViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A02D00535E58FB9225D22 /* Pods_XKCDViewer.framework */; };
@@ -56,6 +57,7 @@
 		1670FD32210516D1004F8B38 /* UIColor+XKCDViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+XKCDViewer.swift"; sourceTree = "<group>"; };
 		1670FD34210516DE004F8B38 /* UIFont+XKCDViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+XKCDViewer.swift"; sourceTree = "<group>"; };
 		1670FD36210516F2004F8B38 /* XKCDComic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDComic.swift; sourceTree = "<group>"; };
+		1670FD3A21051CC7004F8B38 /* XKCDAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDAPIManager.swift; sourceTree = "<group>"; };
 		41EA761E7F139D4D80EEB3AC /* Pods_XKCDViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XKCDViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A02D00535E58FB9225D22 /* Pods_XKCDViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XKCDViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		915B4BF8BBA7AAAAF0CD8C4E /* Pods-XKCDViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XKCDViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-XKCDViewer/Pods-XKCDViewer.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		1670FCFE210515BE004F8B38 /* XKCDViewer */ = {
 			isa = PBXGroup;
 			children = (
+				1670FD3921051A0C004F8B38 /* resources */,
 				1670FD3821051700004F8B38 /* services */,
 				1670FD3121051609004F8B38 /* extensions */,
 				1670FD3021051604004F8B38 /* presenters */,
@@ -195,8 +198,16 @@
 		1670FD3821051700004F8B38 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				1670FD3A21051CC7004F8B38 /* XKCDAPIManager.swift */,
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		1670FD3921051A0C004F8B38 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 		BD5846C171F1FA5D6437A4CB /* Frameworks */ = {
@@ -432,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1670FD3B21051CC7004F8B38 /* XKCDAPIManager.swift in Sources */,
 				1670FD02210515BE004F8B38 /* ViewController.swift in Sources */,
 				1670FD33210516D1004F8B38 /* UIColor+XKCDViewer.swift in Sources */,
 				1670FD37210516F2004F8B38 /* XKCDComic.swift in Sources */,
