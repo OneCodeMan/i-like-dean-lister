@@ -34,14 +34,33 @@ class ViewController: UIViewController {
         view.addSubview(button)
         return button
     }()
+    
+    public lazy var comicNumberTextField: UITextField = {
+       let textField = UITextField()
+        
+        
+        view.addSubview(textField)
+        return textField
+    }()
+    
+    public lazy var comicNumberButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Go to Comic", for: .normal)
+        button.backgroundColor = .black
+        
+        button.addTarget(self, action: #selector(handleComicNumberClicked), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        
         XKCDService.shared.getMostRecentComic { currentComic in
             self.comic = currentComic
-            print(self.comic)
+            //print(self.comic)
         }
         
     }
@@ -65,18 +84,59 @@ class ViewController: UIViewController {
         randomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         randomButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         randomButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        comicNumberTextField.translatesAutoresizingMaskIntoConstraints = false
+        comicNumberTextField.topAnchor.constraint(equalTo: randomButton.bottomAnchor, constant: 10).isActive = true
+        comicNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        comicNumberTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        comicNumberTextField.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        comicNumberButton.translatesAutoresizingMaskIntoConstraints = false
+        comicNumberButton.topAnchor.constraint(equalTo: comicNumberTextField.bottomAnchor, constant: 10).isActive = true
+        comicNumberButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        comicNumberButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        comicNumberButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
     }
     
     @objc func handlePrevClicked() {
         print("Previous button clicked")
+        
+        XKCDService.shared.getPrevComic(currentComicNumber: comicNumber) { prevComic in
+            self.comic = prevComic
+            self.comicNumber = self.comicNumber - 1
+            
+            print(self.comic)
+            
+        }
     }
     
     @objc func handleNextClicked() {
         print("Next button clicked")
+        
+        XKCDService.shared.getNextComic(currentComicNumber: comicNumber) { nextComic in
+            self.comic = nextComic
+            self.comicNumber = self.comicNumber + 1
+            
+            print(self.comic)
+            
+        }
     }
     
     @objc func handleRandomClicked() {
         print("Random button clicked")
+    }
+    
+    @objc func handleComicNumberClicked() {
+        guard let selectedComicNumber = Int(comicNumberTextField.text!) else { return }
+        print("Comic Number clicked")
+        XKCDService.shared.getComicWithNumber(of: selectedComicNumber) { comic in
+            self.comic = comic
+            self.comicNumber = selectedComicNumber
+            
+            print(self.comic)
+        }
+        
     }
     
 
