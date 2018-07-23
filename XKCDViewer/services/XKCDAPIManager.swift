@@ -1,10 +1,13 @@
 import Foundation
 import UIKit
 
-struct XKCDService {
+class XKCDService {
     static let shared = XKCDService()
     
-    func fetchXKCDData<T: Decodable>(urlString: String, completion: @escaping (T) -> ()) {
+    
+    private let mostRecentComic = "https://xkcd.com/info.0.json"
+    
+    private func fetchXKCDData<T: Decodable>(urlString: String, completion: @escaping (T) -> ()) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, err) in
             if let err = err {
@@ -23,6 +26,20 @@ struct XKCDService {
             }
         }.resume()
     }
+    
+    func getMostRecentComic(completion: @escaping (XKCDComic?) -> Void) {
+        fetchXKCDData(urlString: mostRecentComic) { (mostRecentComic: XKCDComic) in
+            completion(mostRecentComic)
+        }
+    }
+    
+    func getPrevComic(comicNumber: Int, completion: @escaping (XKCDComic?) -> Void) {
+        var urlString = ""
+        fetchXKCDData(urlString: mostRecentComic) { (prevComic: XKCDComic) in
+            completion(prevComic)
+        }
+    }
+    
 }
 
 /*

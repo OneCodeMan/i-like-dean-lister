@@ -3,14 +3,14 @@ import UIKit
 class ViewController: UIViewController {
     
     var comic: XKCDComic?
-    var comicUrl: String?
-    var currentComic = 1943
-    var currentComicUrl = "https://xkcd.com/info.0.json"
+    var comicNumber = 1943
     
     public lazy var prevButton: UIButton = {
         let button = UIButton()
         button.setTitle("Previous", for: .normal)
         button.backgroundColor = .black
+        
+        button.addTarget(self, action: #selector(handlePrevClicked), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -19,6 +19,8 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Next", for: .normal)
         button.backgroundColor = .black
+        
+        button.addTarget(self, action: #selector(handleNextClicked), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Random", for: .normal)
         button.backgroundColor = .black
+        
+        button.addTarget(self, action: #selector(handleRandomClicked), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -34,10 +38,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        comicUrl = "https://xkcd.com/\(currentComic)/info.0.json"
-        handleServiceCall(urlString: currentComicUrl)
-        
         setupView()
+        XKCDService.shared.getMostRecentComic { currentComic in
+            self.comic = currentComic
+            print(self.comic)
+        }
         
     }
     
@@ -62,16 +67,19 @@ class ViewController: UIViewController {
         randomButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-    func handleServiceCall(urlString: String) {
-        XKCDService.shared.fetchXKCDData(urlString: urlString) { (comic: XKCDComic) in
-            self.comic = comic
-            print(self.comic)
-            
-            // UI would happen here
-            
-        }
-        
+    @objc func handlePrevClicked() {
+        print("Previous button clicked")
     }
+    
+    @objc func handleNextClicked() {
+        print("Next button clicked")
+    }
+    
+    @objc func handleRandomClicked() {
+        print("Random button clicked")
+    }
+    
+
 
 
 }
