@@ -3,7 +3,18 @@ import UIKit
 class ViewController: UIViewController {
     
     var comic: XKCDComic?
+    var maxComicNumber: Int?
     var comicNumber = 1943
+    
+    public lazy var mostRecentButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Most Recent", for: .normal)
+        button.backgroundColor = .black
+        
+        button.addTarget(self, action: #selector(handleMostRecentClicked), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }()
     
     public lazy var prevButton: UIButton = {
         let button = UIButton()
@@ -60,6 +71,8 @@ class ViewController: UIViewController {
         
         XKCDService.shared.getMostRecentComic { currentComic in
             self.comic = currentComic
+            self.comicNumber = currentComic?.num ?? 0
+            self.maxComicNumber = currentComic?.num ?? 0
             //print(self.comic)
         }
         
@@ -67,8 +80,14 @@ class ViewController: UIViewController {
     
     func setupView() {
         
+        mostRecentButton.translatesAutoresizingMaskIntoConstraints = false
+        mostRecentButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        mostRecentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        mostRecentButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        mostRecentButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
         prevButton.translatesAutoresizingMaskIntoConstraints = false
-        prevButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        prevButton.topAnchor.constraint(equalTo: mostRecentButton.topAnchor, constant: 100).isActive = true
         prevButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         prevButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         prevButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -99,6 +118,18 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func handleMostRecentClicked() {
+        print("Most recent clicked")
+        
+        XKCDService.shared.getMostRecentComic { mostRecentComic in
+            self.comic = mostRecentComic
+            self.comicNumber = mostRecentComic?.num ?? 0
+            
+            print(self.comic)
+            
+        }
+    }
+    
     @objc func handlePrevClicked() {
         print("Previous button clicked")
         
@@ -114,6 +145,10 @@ class ViewController: UIViewController {
     @objc func handleNextClicked() {
         print("Next button clicked")
         
+        if comicNumber == maxComicNumber {
+            comicNumber = 0
+        }
+        
         XKCDService.shared.getNextComic(currentComicNumber: comicNumber) { nextComic in
             self.comic = nextComic
             self.comicNumber = self.comicNumber + 1
@@ -125,6 +160,8 @@ class ViewController: UIViewController {
     
     @objc func handleRandomClicked() {
         print("Random button clicked")
+        
+        // TODO
     }
     
     @objc func handleComicNumberClicked() {
