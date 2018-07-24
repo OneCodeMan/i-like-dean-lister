@@ -150,7 +150,11 @@ class ViewController: UIViewController {
     @objc func handleRandomClicked() {
         print("Random button clicked")
         
-        // TODO
+        session.getRandomComic { randomComic in
+            self.comic = randomComic
+            
+            print(self.comic)
+        }
     }
     
     @objc func handleComicNumberClicked() {
