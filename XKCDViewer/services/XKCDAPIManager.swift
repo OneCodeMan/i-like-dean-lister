@@ -4,6 +4,7 @@ import UIKit
 class XKCDService {
     static let shared = XKCDService()
     
+    var maxComicNumber: Int?
     var urlString = ""
     var comicNumber: Int? {
         didSet {
@@ -13,6 +14,13 @@ class XKCDService {
     }
     
     private let mostRecentComic = "https://xkcd.com/info.0.json"
+    
+    init() {
+        getMostRecentComic { (currentComic) in
+            self.maxComicNumber = currentComic?.num
+            self.comicNumber = currentComic?.num
+        }
+    }
     
     private func fetchXKCDData<T: Decodable>(urlString: String, completion: @escaping (T) -> ()) {
         guard let url = URL(string: urlString) else { return }
@@ -35,20 +43,21 @@ class XKCDService {
     }
     
     func getMostRecentComic(completion: @escaping (XKCDComic?) -> Void) {
+        comicNumber = maxComicNumber
         fetchXKCDData(urlString: mostRecentComic) { (mostRecentComic: XKCDComic) in
             completion(mostRecentComic)
         }
     }
     
-    func getPrevComic(currentComicNumber: Int, completion: @escaping (XKCDComic?) -> Void) {
-        comicNumber = currentComicNumber - 1
+    func getPrevComic(completion: @escaping (XKCDComic?) -> Void) {
+        comicNumber = comicNumber! == 1 ? maxComicNumber : comicNumber! - 1
         fetchXKCDData(urlString: urlString) { (prevComic: XKCDComic) in
             completion(prevComic)
         }
     }
     
-    func getNextComic(currentComicNumber: Int, completion: @escaping (XKCDComic?) -> Void) {
-        comicNumber = currentComicNumber + 1
+    func getNextComic(completion: @escaping (XKCDComic?) -> Void) {
+        comicNumber = comicNumber! == maxComicNumber ? 1 : comicNumber! + 1
         fetchXKCDData(urlString: urlString) { (nextComic: XKCDComic) in
             completion(nextComic)
         }
