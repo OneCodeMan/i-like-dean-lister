@@ -4,17 +4,17 @@ import UIKit
 class XKCDService {
     static let shared = XKCDService()
     
-    var maxComicNumber: Int?
-    var urlString = ""
-    var comicNumber: Int? {
+    private var maxComicNumber: Int?
+    private var urlString = ""
+    private var comicNumber: Int? {
         didSet {
             guard let updatedComicNumber = comicNumber else { return }
             urlString = "https://xkcd.com/\(updatedComicNumber)/info.0.json"
         }
     }
     
-    var visitedRandomComics = [Int]()
-    let maxRandomComics = 150
+    private var visitedRandomComics = [Int]()
+    private let maxRandomComics = 150
     
     private let mostRecentComic = "https://xkcd.com/info.0.json"
     
