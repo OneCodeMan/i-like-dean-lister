@@ -73,7 +73,9 @@ class XKCDService {
     }
     
     func getRandomComic(completion: @escaping (XKCDComic?) -> Void) {
-        comicNumber = 40 //Int.random(in: 1..<maxComicNumber)
+        guard let safeMaxComicNumber = maxComicNumber else { return }
+        comicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        
         fetchXKCDData(urlString: urlString) { (comic: XKCDComic) in
             completion(comic)
         }
