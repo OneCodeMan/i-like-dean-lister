@@ -13,6 +13,9 @@ class XKCDService {
         }
     }
     
+    var visitedRandomComics = [Int]()
+    let maxRandomComics = 150
+    
     private let mostRecentComic = "https://xkcd.com/info.0.json"
     
     init() {
@@ -74,7 +77,14 @@ class XKCDService {
     
     func getRandomComic(completion: @escaping (XKCDComic?) -> Void) {
         guard let safeMaxComicNumber = maxComicNumber else { return }
-        comicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        
+        var randomComicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        while visitedRandomComics.contains(randomComicNumber) {
+            randomComicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        }
+        visitedRandomComics.append(randomComicNumber)
+        comicNumber = randomComicNumber
+        visitedRandomComics = visitedRandomComics.count >= 150 ? [] : visitedRandomComics
         
         fetchXKCDData(urlString: urlString) { (comic: XKCDComic) in
             completion(comic)
