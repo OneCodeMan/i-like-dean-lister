@@ -3,8 +3,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var comic: XKCDComic?
-    var maxComicNumber: Int?
-    var comicNumber = 1943
+    let session = XKCDService.shared
     
     public lazy var mostRecentButton: UIButton = {
         let button = UIButton()
@@ -69,11 +68,8 @@ class ViewController: UIViewController {
         
         setupView()
         
-        XKCDService.shared.getMostRecentComic { currentComic in
+        session.getMostRecentComic { currentComic in
             self.comic = currentComic
-            self.comicNumber = currentComic?.num ?? 0
-            self.maxComicNumber = currentComic?.num ?? 0
-            //print(self.comic)
         }
         
     }
@@ -121,9 +117,8 @@ class ViewController: UIViewController {
     @objc func handleMostRecentClicked() {
         print("Most recent clicked")
         
-        XKCDService.shared.getMostRecentComic { mostRecentComic in
+        session.getMostRecentComic { mostRecentComic in
             self.comic = mostRecentComic
-            self.comicNumber = mostRecentComic?.num ?? 0
             
             print(self.comic)
             
@@ -133,9 +128,8 @@ class ViewController: UIViewController {
     @objc func handlePrevClicked() {
         print("Previous button clicked")
         
-        XKCDService.shared.getPrevComic(currentComicNumber: comicNumber) { prevComic in
+        session.getPrevComic() { prevComic in
             self.comic = prevComic
-            self.comicNumber = self.comicNumber - 1
             
             print(self.comic)
             
@@ -145,13 +139,8 @@ class ViewController: UIViewController {
     @objc func handleNextClicked() {
         print("Next button clicked")
         
-        if comicNumber == maxComicNumber {
-            comicNumber = 0
-        }
-        
-        XKCDService.shared.getNextComic(currentComicNumber: comicNumber) { nextComic in
+        session.getNextComic() { nextComic in
             self.comic = nextComic
-            self.comicNumber = self.comicNumber + 1
             
             print(self.comic)
             
@@ -161,15 +150,18 @@ class ViewController: UIViewController {
     @objc func handleRandomClicked() {
         print("Random button clicked")
         
-        // TODO
+        session.getRandomComic { randomComic in
+            self.comic = randomComic
+            
+            print(self.comic)
+        }
     }
     
     @objc func handleComicNumberClicked() {
         guard let selectedComicNumber = Int(comicNumberTextField.text!) else { return }
         print("Comic Number clicked")
-        XKCDService.shared.getComicWithNumber(of: selectedComicNumber) { comic in
+        session.getComicWithNumber(of: selectedComicNumber) { comic in
             self.comic = comic
-            self.comicNumber = selectedComicNumber
             
             print(self.comic)
         }

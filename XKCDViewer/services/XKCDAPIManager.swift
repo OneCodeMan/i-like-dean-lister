@@ -4,6 +4,7 @@ import UIKit
 class XKCDService {
     static let shared = XKCDService()
     
+    var maxComicNumber: Int?
     var urlString = ""
     var comicNumber: Int? {
         didSet {
@@ -12,7 +13,17 @@ class XKCDService {
         }
     }
     
+    var visitedRandomComics = [Int]()
+    let maxRandomComics = 150
+    
     private let mostRecentComic = "https://xkcd.com/info.0.json"
+    
+    init() {
+        getMostRecentComic { (currentComic) in
+            self.maxComicNumber = currentComic?.num
+            self.comicNumber = currentComic?.num
+        }
+    }
     
     private func fetchXKCDData<T: Decodable>(urlString: String, completion: @escaping (T) -> ()) {
         guard let url = URL(string: urlString) else { return }
@@ -35,20 +46,23 @@ class XKCDService {
     }
     
     func getMostRecentComic(completion: @escaping (XKCDComic?) -> Void) {
+        comicNumber = maxComicNumber
         fetchXKCDData(urlString: mostRecentComic) { (mostRecentComic: XKCDComic) in
             completion(mostRecentComic)
         }
     }
     
-    func getPrevComic(currentComicNumber: Int, completion: @escaping (XKCDComic?) -> Void) {
-        comicNumber = currentComicNumber - 1
+    func getPrevComic(completion: @escaping (XKCDComic?) -> Void) {
+        guard let currentComicNumber = comicNumber else { return }
+        comicNumber = currentComicNumber == 1 ? maxComicNumber : currentComicNumber - 1
         fetchXKCDData(urlString: urlString) { (prevComic: XKCDComic) in
             completion(prevComic)
         }
     }
     
-    func getNextComic(currentComicNumber: Int, completion: @escaping (XKCDComic?) -> Void) {
-        comicNumber = currentComicNumber + 1
+    func getNextComic(completion: @escaping (XKCDComic?) -> Void) {
+        guard let currentComicNumber = comicNumber else { return }
+        comicNumber = currentComicNumber == maxComicNumber ? 1 : currentComicNumber + 1
         fetchXKCDData(urlString: urlString) { (nextComic: XKCDComic) in
             completion(nextComic)
         }
@@ -61,21 +75,20 @@ class XKCDService {
         }
     }
     
+    func getRandomComic(completion: @escaping (XKCDComic?) -> Void) {
+        guard let safeMaxComicNumber = maxComicNumber else { return }
+        
+        var randomComicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        while visitedRandomComics.contains(randomComicNumber) {
+            randomComicNumber = Int.random(in: 1..<safeMaxComicNumber)
+        }
+        visitedRandomComics.append(randomComicNumber)
+        comicNumber = randomComicNumber
+        visitedRandomComics = visitedRandomComics.count >= 150 ? [] : visitedRandomComics
+        
+        fetchXKCDData(urlString: urlString) { (comic: XKCDComic) in
+            completion(comic)
+        }
+    }
+    
 }
-
-/*
- How to use:
- 
- let urlString = "https://api.letsbuildthatapp.com/youtube/course_detail?id=\(video.id)"
- Service.shared.fetchGenericData(urlString: urlString) { (courseDetails: [CourseDetails]) in
-    self.courseDetails = courseDetails
-    self.tableView.reloadData()
- }
- 
- struct CourseDetails: Decodable {
-     let name: String
-     let duration: String
-     let imageUrl: String
- }
-
- */
