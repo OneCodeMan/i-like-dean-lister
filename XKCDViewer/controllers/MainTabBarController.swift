@@ -4,14 +4,12 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         
-        tabBar.tintColor = UIColor.background
         setupViewControllers()
     }
     
     private func setupViewControllers() {
         viewControllers = [
-            generateNavigationController(for: ComicViewController(), title: "Comics", image: "feels"),
-            generateNavigationController(for: ComicViewController(), title: "Comics", image: "feels")
+            generateNavigationController(for: ComicViewController(), title: "Comics", image: UIImage.init(named: "feels")!),
         ]
     }
     
@@ -19,7 +17,7 @@ class MainTabBarController: UITabBarController {
         let navController = UINavigationController(rootViewController: rootViewController)
         rootViewController.navigationItem.title = title
         navController.tabBarItem.title = title
-        navController.tabBarItem.image = UIImage.init(named: image)
+        navController.tabBarItem.image = image
         return navController
     }
 }

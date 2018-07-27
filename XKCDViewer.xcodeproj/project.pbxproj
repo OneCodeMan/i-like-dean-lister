@@ -136,6 +136,7 @@
 		1670FCFE210515BE004F8B38 /* XKCDViewer */ = {
 			isa = PBXGroup;
 			children = (
+				1670FCFF210515BE004F8B38 /* AppDelegate.swift */,
 				160C87E721091ABD000011E0 /* delegates */,
 				1670FD3921051A0C004F8B38 /* resources */,
 				1670FD3821051700004F8B38 /* services */,
@@ -144,7 +145,6 @@
 				1670FD2F21051600004F8B38 /* controllers */,
 				1670FD2E210515FC004F8B38 /* views */,
 				1670FD2D210515F6004F8B38 /* models */,
-				1670FCFF210515BE004F8B38 /* AppDelegate.swift */,
 				1670FD03210515BE004F8B38 /* Main.storyboard */,
 				1670FD06210515C0004F8B38 /* Assets.xcassets */,
 				1670FD08210515C0004F8B38 /* LaunchScreen.storyboard */,

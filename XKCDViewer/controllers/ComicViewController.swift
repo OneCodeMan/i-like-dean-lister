@@ -12,12 +12,17 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         
         session.getMostRecentComic { currentComic in
             self.comic = currentComic
+            self.comicView.comic = currentComic
         }
         
+        comicView.delegate = self
+        
+        view.backgroundColor = .white
         view.addSubview(comicView)
         comicView.snp.makeConstraints {
-            $0.top.bottom.left.right.equalTo(0)
+            $0.top.left.right.top.bottom.equalTo(0)
         }
+        
         
     }
     
@@ -36,7 +41,7 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         print("Previous button clicked")
         
         session.getPrevComic() { prevComic in
-            self.comic = prevComic
+            self.comicView.comic = prevComic
             
             print(self.comic)
             
@@ -47,7 +52,7 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         print("Next button clicked")
         
         session.getNextComic() { nextComic in
-            self.comic = nextComic
+            self.comicView.comic = nextComic
             
             print(self.comic)
             
@@ -58,18 +63,18 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         print("Random button clicked")
         
         session.getRandomComic { randomComic in
-            self.comic = randomComic
+            self.comicView.comic = randomComic
             
             print(self.comic)
         }
     }
     
-    @objc func handleSelectedComicNumber() {
+    @objc func handleSelectedComicNumber(_ number: Int) {
         print("Comic Number clicked")
         
-        let selectedComicNumber = 500
+        let selectedComicNumber = number
         session.getComicWithNumber(of: selectedComicNumber) { comic in
-            self.comic = comic
+            self.comicView.comic = comic
             
             print(self.comic)
         }
