@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160C87E221091888000011E0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E121091888000011E0 /* MainTabBarController.swift */; };
+		160C87E421091A3C000011E0 /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E321091A3C000011E0 /* ComicView.swift */; };
+		160C87E621091AB5000011E0 /* ComicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E521091AB5000011E0 /* ComicDelegate.swift */; };
 		1670FD00210515BE004F8B38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FCFF210515BE004F8B38 /* AppDelegate.swift */; };
-		1670FD02210515BE004F8B38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD01210515BE004F8B38 /* ViewController.swift */; };
+		1670FD02210515BE004F8B38 /* ComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD01210515BE004F8B38 /* ComicViewController.swift */; };
 		1670FD05210515BE004F8B38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1670FD03210515BE004F8B38 /* Main.storyboard */; };
 		1670FD07210515C0004F8B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1670FD06210515C0004F8B38 /* Assets.xcassets */; };
 		1670FD0A210515C0004F8B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1670FD08210515C0004F8B38 /* LaunchScreen.storyboard */; };
@@ -41,9 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160C87E121091888000011E0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		160C87E321091A3C000011E0 /* ComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicView.swift; sourceTree = "<group>"; };
+		160C87E521091AB5000011E0 /* ComicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDelegate.swift; sourceTree = "<group>"; };
 		1670FCFC210515BE004F8B38 /* XKCDViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XKCDViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1670FCFF210515BE004F8B38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1670FD01210515BE004F8B38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1670FD01210515BE004F8B38 /* ComicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicViewController.swift; sourceTree = "<group>"; };
 		1670FD04210515BE004F8B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1670FD06210515C0004F8B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1670FD09210515C0004F8B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160C87E721091ABD000011E0 /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				160C87E521091AB5000011E0 /* ComicDelegate.swift */,
+			);
+			path = delegates;
+			sourceTree = "<group>";
+		};
 		1670FCF3210515BE004F8B38 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +136,7 @@
 		1670FCFE210515BE004F8B38 /* XKCDViewer */ = {
 			isa = PBXGroup;
 			children = (
+				160C87E721091ABD000011E0 /* delegates */,
 				1670FD3921051A0C004F8B38 /* resources */,
 				1670FD3821051700004F8B38 /* services */,
 				1670FD3121051609004F8B38 /* extensions */,
@@ -130,7 +145,6 @@
 				1670FD2E210515FC004F8B38 /* views */,
 				1670FD2D210515F6004F8B38 /* models */,
 				1670FCFF210515BE004F8B38 /* AppDelegate.swift */,
-				1670FD01210515BE004F8B38 /* ViewController.swift */,
 				1670FD03210515BE004F8B38 /* Main.storyboard */,
 				1670FD06210515C0004F8B38 /* Assets.xcassets */,
 				1670FD08210515C0004F8B38 /* LaunchScreen.storyboard */,
@@ -168,6 +182,7 @@
 		1670FD2E210515FC004F8B38 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				160C87E321091A3C000011E0 /* ComicView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -175,6 +190,8 @@
 		1670FD2F21051600004F8B38 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1670FD01210515BE004F8B38 /* ComicViewController.swift */,
+				160C87E121091888000011E0 /* MainTabBarController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -443,9 +460,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				160C87E421091A3C000011E0 /* ComicView.swift in Sources */,
 				1670FD3B21051CC7004F8B38 /* XKCDAPIManager.swift in Sources */,
-				1670FD02210515BE004F8B38 /* ViewController.swift in Sources */,
+				1670FD02210515BE004F8B38 /* ComicViewController.swift in Sources */,
 				1670FD33210516D1004F8B38 /* UIColor+XKCDViewer.swift in Sources */,
+				160C87E621091AB5000011E0 /* ComicDelegate.swift in Sources */,
+				160C87E221091888000011E0 /* MainTabBarController.swift in Sources */,
 				1670FD37210516F2004F8B38 /* XKCDComic.swift in Sources */,
 				1670FD35210516DE004F8B38 /* UIFont+XKCDViewer.swift in Sources */,
 				1670FD00210515BE004F8B38 /* AppDelegate.swift in Sources */,
