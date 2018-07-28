@@ -3,7 +3,6 @@ import SnapKit
 
 class ComicViewController: UIViewController, ComicViewDelegate {
     
-    var comic: XKCDComic?
     var comicView = ComicView()
     let session = XKCDService.shared
 
@@ -11,7 +10,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         super.viewDidLoad()
         
         session.getMostRecentComic { currentComic in
-            self.comic = currentComic
             self.comicView.comic = currentComic
         }
         
@@ -30,9 +28,8 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         print("Most recent clicked")
         
         session.getMostRecentComic { mostRecentComic in
-            self.comic = mostRecentComic
+            self.comicView.comic = mostRecentComic
             
-            print(self.comic)
             
         }
     }
@@ -43,7 +40,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         session.getPrevComic() { prevComic in
             self.comicView.comic = prevComic
             
-            print(self.comic)
             
         }
     }
@@ -54,7 +50,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         session.getNextComic() { nextComic in
             self.comicView.comic = nextComic
             
-            print(self.comic)
             
         }
     }
@@ -65,7 +60,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         session.getRandomComic { randomComic in
             self.comicView.comic = randomComic
             
-            print(self.comic)
         }
     }
     
@@ -76,7 +70,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         session.getComicWithNumber(of: selectedComicNumber) { comic in
             self.comicView.comic = comic
             
-            print(self.comic)
         }
         
     }

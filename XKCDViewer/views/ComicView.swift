@@ -73,16 +73,6 @@ class ComicView: UIView {
         self.addSubview(label)
         return label
     }()
-
-    public lazy var mostRecentButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Most Recent", for: .normal)
-        button.backgroundColor = .black
-        
-        button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
-        self.addSubview(button)
-        return button
-    }()
     
     public lazy var prevButton: UIButton = {
         let button = UIButton()
@@ -136,6 +126,16 @@ class ComicView: UIView {
         button.backgroundColor = .black
         
         button.addTarget(self, action: #selector(handleSelectedComicNumber(_:)), for: .touchUpInside)
+        self.addSubview(button)
+        return button
+    }()
+    
+    public lazy var mostRecentComicButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Most Recent", for: .normal)
+        button.backgroundColor = .black
+        button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
+        
         self.addSubview(button)
         return button
     }()
@@ -204,6 +204,11 @@ class ComicView: UIView {
         comicNumberButton.snp.makeConstraints {
             $0.top.equalTo(enterComicNumberLabel.snp.bottom).offset(5)
             $0.left.equalTo(comicNumberTextField.snp.right).offset(15)
+        }
+        
+        mostRecentComicButton.snp.makeConstraints {
+            $0.top.equalTo(enterComicNumberLabel.snp.bottom).offset(5)
+            $0.left.equalTo(comicNumberButton.snp.right).offset(5)
         }
         
     }
