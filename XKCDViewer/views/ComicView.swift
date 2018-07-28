@@ -21,7 +21,6 @@ class ComicView: UIView {
             }
             
             comicDateLabel.text = "\(comic.month)/\(comic.day)/\(comic.year)"
-            comicTranscriptLabel.text = "\(comic.transcript)"
             
         }
     }
@@ -87,7 +86,7 @@ class ComicView: UIView {
     public lazy var prevButton: UIButton = {
         let button = UIButton()
         button.setTitle("Previous", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .buttonBackground
         
         button.addTarget(self, action: #selector(handlePrevClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -97,7 +96,7 @@ class ComicView: UIView {
     public lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("Next", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .buttonBackground
         
         button.addTarget(self, action: #selector(handleNextClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -107,7 +106,7 @@ class ComicView: UIView {
     public lazy var randomButton: UIButton = {
         let button = UIButton()
         button.setTitle("Random", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .buttonBackground
         
         button.addTarget(self, action: #selector(handleRandomClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -133,7 +132,7 @@ class ComicView: UIView {
     public lazy var comicNumberButton: UIButton = {
         let button = UIButton()
         button.setTitle("Go to Comic", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .buttonBackground
         
         button.addTarget(self, action: #selector(handleSelectedComicNumber(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -143,7 +142,7 @@ class ComicView: UIView {
     public lazy var mostRecentComicButton: UIButton = {
         let button = UIButton()
         button.setTitle("Most Recent", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .buttonBackground
         button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
         
         self.addSubview(button)
@@ -195,26 +194,20 @@ class ComicView: UIView {
             $0.centerX.equalToSuperview()
         }
         
-        comicTranscriptLabel.snp.makeConstraints {
-            $0.top.equalTo(comicDateLabel.snp.bottom).offset(5)
-            $0.height.lessThanOrEqualTo(100)
-            $0.left.right.equalTo(0)
-        }
-        
         prevButton.snp.makeConstraints {
-            $0.top.equalTo(comicTranscriptLabel.snp.bottom).offset(5)
+            $0.top.equalTo(comicDateLabel.snp.bottom).offset(5)
             $0.left.equalTo(8)
             $0.width.lessThanOrEqualTo(100)
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(comicTranscriptLabel.snp.bottom).offset(5)
+            $0.top.equalTo(comicDateLabel.snp.bottom).offset(5)
             $0.right.equalTo(-8)
             $0.width.equalTo(prevButton)
         }
         
         randomButton.snp.makeConstraints {
-            $0.top.equalTo(comicTranscriptLabel.snp.bottom).offset(5)
+            $0.top.equalTo(comicDateLabel.snp.bottom).offset(5)
             $0.left.equalTo(prevButton.snp.right).offset(5)
             $0.right.equalTo(nextButton.snp.left).offset(-5)
             $0.width.equalTo(prevButton)
