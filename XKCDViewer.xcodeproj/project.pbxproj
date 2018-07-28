@@ -146,7 +146,6 @@
 				1670FD2E210515FC004F8B38 /* views */,
 				1670FD2D210515F6004F8B38 /* models */,
 				1670FD03210515BE004F8B38 /* Main.storyboard */,
-				1670FD06210515C0004F8B38 /* Assets.xcassets */,
 				1670FD08210515C0004F8B38 /* LaunchScreen.storyboard */,
 				1670FD0B210515C0004F8B38 /* Info.plist */,
 			);
@@ -223,6 +222,7 @@
 		1670FD3921051A0C004F8B38 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				1670FD06210515C0004F8B38 /* Assets.xcassets */,
 			);
 			path = resources;
 			sourceTree = "<group>";

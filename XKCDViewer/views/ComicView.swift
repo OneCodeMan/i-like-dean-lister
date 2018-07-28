@@ -30,6 +30,7 @@ class ComicView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "#224"
+        label.font = .helveticaItalic
         
         self.addSubview(label)
         return label
@@ -39,8 +40,8 @@ class ComicView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-
         label.text = "Communication"
+        label.font = .helveticaBold
         
         self.addSubview(label)
         return label
@@ -67,17 +68,7 @@ class ComicView: UIView {
     public lazy var comicDateLabel: UILabel = {
         let label = UILabel()
         label.text = "7/17/2018"
-        
-        self.addSubview(label)
-        return label
-    }()
-    
-    public lazy var comicTranscriptLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        
-        label.text = "Test transcript"
+        label.font = .helveticaLight
         
         self.addSubview(label)
         return label
@@ -87,6 +78,7 @@ class ComicView: UIView {
         let button = UIButton()
         button.setTitle("Previous", for: .normal)
         button.backgroundColor = .buttonBackground
+        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handlePrevClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -97,6 +89,7 @@ class ComicView: UIView {
         let button = UIButton()
         button.setTitle("Next", for: .normal)
         button.backgroundColor = .buttonBackground
+        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleNextClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -107,6 +100,7 @@ class ComicView: UIView {
         let button = UIButton()
         button.setTitle("Random", for: .normal)
         button.backgroundColor = .buttonBackground
+        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleRandomClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -133,6 +127,7 @@ class ComicView: UIView {
         let button = UIButton()
         button.setTitle("Go to Comic", for: .normal)
         button.backgroundColor = .buttonBackground
+        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleSelectedComicNumber(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -143,6 +138,8 @@ class ComicView: UIView {
         let button = UIButton()
         button.setTitle("Most Recent", for: .normal)
         button.backgroundColor = .buttonBackground
+        button.titleLabel?.font = .helveticaNormal
+        
         button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
         
         self.addSubview(button)
@@ -156,7 +153,6 @@ class ComicView: UIView {
         comicImageScrollView.delegate = self
         comicImageScrollView.minimumZoomScale = 1.0
         comicImageScrollView.maximumZoomScale = 10.0
-        
         setupView()
         
     }
@@ -190,7 +186,7 @@ class ComicView: UIView {
         }
         
         comicDateLabel.snp.makeConstraints {
-            $0.top.equalTo(comicImageScrollView.snp.bottom)
+            $0.top.equalTo(comicImageScrollView.snp.bottom).offset(2)
             $0.centerX.equalToSuperview()
         }
         
