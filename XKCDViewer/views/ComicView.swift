@@ -190,7 +190,7 @@ class ComicView: UIView {
         }
         
         comicDateLabel.snp.makeConstraints {
-            $0.top.equalTo(comicImageScrollView.snp.bottom).offset(5)
+            $0.top.equalTo(comicImageScrollView.snp.bottom)
             $0.centerX.equalToSuperview()
         }
         
@@ -269,11 +269,11 @@ extension ComicView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x != 0 {
+        if scrollView.contentOffset.x != 0 && scrollView.zoomScale == 1.0 {
             scrollView.contentOffset.x = 0
         }
         
-        if scrollView.contentOffset.y != 0 {
+        if scrollView.contentOffset.y != 0 && scrollView.zoomScale == 1.0 {
             scrollView.contentOffset.y = 0
         }
     }
