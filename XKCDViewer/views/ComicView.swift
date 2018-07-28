@@ -13,6 +13,7 @@ class ComicView: UIView {
             let url = URL(string: comic.img)!
             let data = try? Data(contentsOf: url)
             
+            comicImageScrollView.zoomScale = 1.0
             if let imageData = data {
                 comicImageView.image = UIImage(data: imageData)
             } else {
@@ -45,13 +46,21 @@ class ComicView: UIView {
         return label
     }()
     
+    public lazy var comicImageScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        self.addSubview(scrollView)
+        return scrollView
+    }()
+    
     public lazy var comicImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage.init(named: "the_general_problem")
         image.contentMode = .scaleAspectFit
-        image.isUserInteractionEnabled = true
         
-        self.addSubview(image)
+        comicImageScrollView.addSubview(image)
         return image
     }()
     
@@ -143,6 +152,10 @@ class ComicView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        comicImageScrollView.delegate = self
+        comicImageScrollView.minimumZoomScale = 1.0
+        comicImageScrollView.maximumZoomScale = 10.0
+        
         comicNumberLabel.snp.makeConstraints {
             $0.top.equalTo(50)
             $0.centerX.equalToSuperview()
@@ -153,14 +166,20 @@ class ComicView: UIView {
             $0.left.right.equalTo(0)
         }
         
-        comicImageView.snp.makeConstraints {
+        comicImageScrollView.snp.makeConstraints {
             $0.top.equalTo(comicTitleLabel.snp.bottom).offset(5)
             $0.height.lessThanOrEqualTo(450)
-            $0.left.right.equalTo(0)
+            $0.left.equalTo(1)
+            $0.right.equalTo(-1)
+        }
+        
+        comicImageView.snp.makeConstraints {
+            $0.height.equalTo(comicImageScrollView)
+            $0.width.equalTo(comicImageScrollView)
         }
         
         comicDateLabel.snp.makeConstraints {
-            $0.top.equalTo(comicImageView.snp.bottom).offset(5)
+            $0.top.equalTo(comicImageScrollView.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
         }
         
@@ -239,4 +258,21 @@ class ComicView: UIView {
         delegate?.handleSelectedComicNumber(selectedComicNumber)
     }
 
+}
+
+extension ComicView: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.comicImageView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
+        
+        if scrollView.contentOffset.y != 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
 }
