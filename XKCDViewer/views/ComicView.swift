@@ -26,6 +26,7 @@ class ComicView: UIView {
         }
     }
     
+    // MARK:- View components
     public lazy var comicNumberLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -149,6 +150,7 @@ class ComicView: UIView {
         return button
     }()
     
+    // MARK:- Init functions
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -156,6 +158,16 @@ class ComicView: UIView {
         comicImageScrollView.minimumZoomScale = 1.0
         comicImageScrollView.maximumZoomScale = 10.0
         
+        setupView()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:- Set up view
+    func setupView() {
         comicNumberLabel.snp.makeConstraints {
             $0.top.equalTo(50)
             $0.centerX.equalToSuperview()
@@ -229,13 +241,9 @@ class ComicView: UIView {
             $0.top.equalTo(enterComicNumberLabel.snp.bottom).offset(5)
             $0.left.equalTo(comicNumberButton.snp.right).offset(5)
         }
-        
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    // MARK:- Button click functions
     @objc func handleMostRecentClicked(_ sender: Any) {
         delegate?.handleMostRecentClicked()
     }
@@ -260,6 +268,7 @@ class ComicView: UIView {
 
 }
 
+// MARK:- UIScrollViewDelegate
 extension ComicView: UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
