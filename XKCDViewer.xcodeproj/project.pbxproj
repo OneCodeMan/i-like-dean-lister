@@ -10,6 +10,7 @@
 		160C87E221091888000011E0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E121091888000011E0 /* MainTabBarController.swift */; };
 		160C87E421091A3C000011E0 /* ComicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E321091A3C000011E0 /* ComicView.swift */; };
 		160C87E621091AB5000011E0 /* ComicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160C87E521091AB5000011E0 /* ComicDelegate.swift */; };
+		164CD3F1210CE1E1002106E0 /* XKCDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164CD3F0210CE1E1002106E0 /* XKCDButton.swift */; };
 		1670FD00210515BE004F8B38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FCFF210515BE004F8B38 /* AppDelegate.swift */; };
 		1670FD02210515BE004F8B38 /* ComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD01210515BE004F8B38 /* ComicViewController.swift */; };
 		1670FD05210515BE004F8B38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1670FD03210515BE004F8B38 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		160C87E121091888000011E0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		160C87E321091A3C000011E0 /* ComicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicView.swift; sourceTree = "<group>"; };
 		160C87E521091AB5000011E0 /* ComicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDelegate.swift; sourceTree = "<group>"; };
+		164CD3F0210CE1E1002106E0 /* XKCDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDButton.swift; sourceTree = "<group>"; };
 		1670FCFC210515BE004F8B38 /* XKCDViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XKCDViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1670FCFF210515BE004F8B38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1670FD01210515BE004F8B38 /* ComicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				160C87E321091A3C000011E0 /* ComicView.swift */,
+				164CD3F0210CE1E1002106E0 /* XKCDButton.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				160C87E421091A3C000011E0 /* ComicView.swift in Sources */,
+				164CD3F1210CE1E1002106E0 /* XKCDButton.swift in Sources */,
 				1670FD3B21051CC7004F8B38 /* XKCDAPIManager.swift in Sources */,
 				1670FD02210515BE004F8B38 /* ComicViewController.swift in Sources */,
 				1670FD33210516D1004F8B38 /* UIColor+XKCDViewer.swift in Sources */,

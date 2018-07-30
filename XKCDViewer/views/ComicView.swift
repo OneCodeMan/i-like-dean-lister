@@ -74,33 +74,27 @@ class ComicView: UIView {
         return label
     }()
     
-    public lazy var prevButton: UIButton = {
-        let button = UIButton()
+    public lazy var prevButton: XKCDButton = {
+        let button = XKCDButton()
         button.setTitle("Previous", for: .normal)
-        button.backgroundColor = .buttonBackground
-        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handlePrevClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
         return button
     }()
     
-    public lazy var nextButton: UIButton = {
-        let button = UIButton()
+    public lazy var nextButton: XKCDButton = {
+        let button = XKCDButton()
         button.setTitle("Next", for: .normal)
-        button.backgroundColor = .buttonBackground
-        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleNextClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
         return button
     }()
     
-    public lazy var randomButton: UIButton = {
-        let button = UIButton()
+    public lazy var randomButton: XKCDButton = {
+        let button = XKCDButton()
         button.setTitle("Random", for: .normal)
-        button.backgroundColor = .buttonBackground
-        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleRandomClicked(_:)), for: .touchUpInside)
         self.addSubview(button)
@@ -123,22 +117,18 @@ class ComicView: UIView {
         return textField
     }()
     
-    public lazy var comicNumberButton: UIButton = {
-        let button = UIButton()
+    public lazy var comicNumberButton: XKCDButton = {
+        let button = XKCDButton()
         button.setTitle("Go to Comic", for: .normal)
-        button.backgroundColor = .buttonBackground
-        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleSelectedComicNumber(_:)), for: .touchUpInside)
         self.addSubview(button)
         return button
     }()
     
-    public lazy var mostRecentComicButton: UIButton = {
-        let button = UIButton()
+    public lazy var mostRecentComicButton: XKCDButton = {
+        let button = XKCDButton()
         button.setTitle("Most Recent", for: .normal)
-        button.backgroundColor = .buttonBackground
-        button.titleLabel?.font = .helveticaNormal
         
         button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
         
