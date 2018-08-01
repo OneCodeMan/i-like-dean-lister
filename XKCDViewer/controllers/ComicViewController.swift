@@ -9,21 +9,26 @@ class ComicViewController: UIViewController, ComicViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        
         session.getMostRecentComic { currentComic in
             self.comicView.comic = currentComic
         }
         
         comicView.delegate = self
         
+    }
+    
+    // MARK:- Setting up view
+    private func setupView() {
         view.backgroundColor = .white
         view.addSubview(comicView)
         comicView.snp.makeConstraints {
             $0.top.left.right.top.bottom.equalTo(0)
         }
-        
-        
     }
     
+    // MARK:- Button handlers
     @objc func handleMostRecentClicked() {
         print("Most recent clicked")
         

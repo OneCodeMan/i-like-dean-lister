@@ -143,9 +143,27 @@ class ComicView: UIView {
     // MARK:- Init functions
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
+        NotificationCenter.default.addObserver(self, selector: #selector(ComicView.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ComicView.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+    }
+    
+    // MARK:- Keyboard toggle handlers
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.frame.origin.y == 0 {
+                self.frame.origin.y =  self.frame.origin.y - keyboardSize.height - (comicImageView.image?.size.height)! / 2
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.frame.origin.y != 0 {
+                self.frame.origin.y = self.frame.origin.y + keyboardSize.height + (comicImageView.image?.size.height)! / 2
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -163,8 +181,6 @@ class ComicView: UIView {
                 comicMaxHeight = 400
             }
         }
-        
-        comicNumberTextField.delegate = self
         
         comicImageScrollView.delegate = self
         comicImageScrollView.minimumZoomScale = 1.0
@@ -261,6 +277,11 @@ class ComicView: UIView {
         guard let selectedComicNumber = Int(comicNumTextFieldInput) else { return }
         delegate?.handleSelectedComicNumber(selectedComicNumber)
     }
+    
+    // MARK:- Keyboard logic
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
 
 }
 
@@ -280,8 +301,4 @@ extension ComicView: UIScrollViewDelegate {
             scrollView.contentOffset.y = 0
         }
     }
-}
-
-extension ComicView: UITextFieldDelegate {
-    
 }
