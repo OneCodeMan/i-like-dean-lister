@@ -128,7 +128,7 @@ class ComicView: UIView {
     
     public lazy var mostRecentComicButton: XKCDButton = {
         let button = XKCDButton()
-        button.setTitle("Most Recent", for: .normal)
+        button.setTitle("Recent", for: .normal)
         
         button.addTarget(self, action: #selector(handleMostRecentClicked(_:)), for: .touchUpInside)
         
@@ -153,6 +153,17 @@ class ComicView: UIView {
     
     // MARK:- Set up view
     func setupView() {
+        var comicMaxHeight = 0
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 1136:
+                comicMaxHeight = 200
+            default:
+                comicMaxHeight = 400
+            }
+        }
+                
+        
         comicNumberLabel.snp.makeConstraints {
             $0.top.equalTo(50)
             $0.centerX.equalToSuperview()
@@ -165,7 +176,7 @@ class ComicView: UIView {
         
         comicImageScrollView.snp.makeConstraints {
             $0.top.equalTo(comicTitleLabel.snp.bottom).offset(5)
-            $0.height.lessThanOrEqualTo(450)
+            $0.height.lessThanOrEqualTo(comicMaxHeight)
             $0.left.equalTo(1)
             $0.right.equalTo(-1)
         }
@@ -208,7 +219,7 @@ class ComicView: UIView {
             $0.top.equalTo(enterComicNumberLabel.snp.bottom).offset(5)
             $0.left.equalTo(8)
             $0.width.equalTo(100)
-            $0.height.equalTo(50)
+            $0.height.equalTo(35)
         }
         
         comicNumberButton.snp.makeConstraints {

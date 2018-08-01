@@ -18,6 +18,7 @@ class XKCDButton: UIButton {
         self.layer.shadowOffset = CGSize(width: 0, height: 6)
         self.layer.shadowRadius = 3
         self.layer.shadowOpacity = 1.0
+        self.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
     }
 
 }
