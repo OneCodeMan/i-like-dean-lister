@@ -111,7 +111,11 @@ class ComicView: UIView {
     
     public lazy var comicNumberTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .gray
+        textField.backgroundColor = .background
+        textField.layer.shadowColor = UIColor.buttonBackground.cgColor
+        textField.layer.shadowOffset = CGSize(width: 0, height: 6)
+        textField.layer.shadowRadius = 3
+        textField.layer.shadowOpacity = 1.0
         
         self.addSubview(textField)
         return textField
@@ -140,9 +144,6 @@ class ComicView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        comicImageScrollView.delegate = self
-        comicImageScrollView.minimumZoomScale = 1.0
-        comicImageScrollView.maximumZoomScale = 10.0
         setupView()
         
     }
@@ -162,7 +163,12 @@ class ComicView: UIView {
                 comicMaxHeight = 400
             }
         }
-                
+        
+        comicNumberTextField.delegate = self
+        
+        comicImageScrollView.delegate = self
+        comicImageScrollView.minimumZoomScale = 1.0
+        comicImageScrollView.maximumZoomScale = 10.0
         
         comicNumberLabel.snp.makeConstraints {
             $0.top.equalTo(50)
@@ -274,4 +280,8 @@ extension ComicView: UIScrollViewDelegate {
             scrollView.contentOffset.y = 0
         }
     }
+}
+
+extension ComicView: UITextFieldDelegate {
+    
 }
