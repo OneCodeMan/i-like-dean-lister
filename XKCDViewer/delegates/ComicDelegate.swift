@@ -7,4 +7,5 @@ protocol ComicViewDelegate {
     func handleNextClicked()
     func handleRandomClicked()
     func handleSelectedComicNumber(_ number: Int)
+    func handleToggleFavorite()
 }

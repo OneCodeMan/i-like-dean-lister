@@ -78,6 +78,12 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         }
         
     }
+    
+    @objc func handleToggleFavorite() {
+        print("Favorite clicked")
+        
+        comicView.toggleFavoriteButton.setImage("notfavorite", for: .normal)
+    }
 
 
 }

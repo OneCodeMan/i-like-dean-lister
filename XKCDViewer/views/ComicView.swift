@@ -25,8 +25,10 @@ class ComicView: UIView {
         }
     }
     
+    var isFavorite: Bool?
+    
     // MARK:- View components
-    public lazy var comicNumberLabel: UILabel = {
+    lazy var comicNumberLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "#224"
@@ -36,7 +38,18 @@ class ComicView: UIView {
         return label
     }()
     
-    public lazy var comicTitleLabel: UILabel = {
+    lazy var toggleFavoriteButton: UIButton = {
+        let button = UIButton()
+        let buttonImage = UIImage.init(named: "notfavorite")
+        button.addTarget(self, action: #selector(handleToggleFavorite(_:)), for: .touchUpInside)
+        button.setTitle("Favorite", for: .normal)
+        button.setImage(buttonImage, for: .normal)
+        
+        self.addSubview(button)
+        return button
+    }()
+    
+    lazy var comicTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -47,7 +60,7 @@ class ComicView: UIView {
         return label
     }()
     
-    public lazy var comicImageScrollView: UIScrollView = {
+    lazy var comicImageScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -56,7 +69,7 @@ class ComicView: UIView {
         return scrollView
     }()
     
-    public lazy var comicImageView: UIImageView = {
+    lazy var comicImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage.init(named: "the_general_problem")
         image.contentMode = .scaleAspectFit
@@ -65,7 +78,7 @@ class ComicView: UIView {
         return image
     }()
     
-    public lazy var comicDateLabel: UILabel = {
+    lazy var comicDateLabel: UILabel = {
         let label = UILabel()
         label.text = "7/17/2018"
         label.font = .helveticaLight
@@ -74,7 +87,7 @@ class ComicView: UIView {
         return label
     }()
     
-    public lazy var prevButton: XKCDButton = {
+    lazy var prevButton: XKCDButton = {
         let button = XKCDButton()
         button.setTitle("Previous", for: .normal)
         
@@ -83,7 +96,7 @@ class ComicView: UIView {
         return button
     }()
     
-    public lazy var nextButton: XKCDButton = {
+    lazy var nextButton: XKCDButton = {
         let button = XKCDButton()
         button.setTitle("Next", for: .normal)
         
@@ -92,7 +105,7 @@ class ComicView: UIView {
         return button
     }()
     
-    public lazy var randomButton: XKCDButton = {
+    lazy var randomButton: XKCDButton = {
         let button = XKCDButton()
         button.setTitle("Random", for: .normal)
         
@@ -101,7 +114,7 @@ class ComicView: UIView {
         return button
     }()
     
-    public lazy var enterComicNumberLabel: UILabel = {
+    lazy var enterComicNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "Or enter a comic number:"
         
@@ -109,7 +122,7 @@ class ComicView: UIView {
         return label
     }()
     
-    public lazy var comicNumberTextField: UITextField = {
+    lazy var comicNumberTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .background
         textField.layer.shadowColor = UIColor.buttonBackground.cgColor
@@ -121,7 +134,7 @@ class ComicView: UIView {
         return textField
     }()
     
-    public lazy var comicNumberButton: XKCDButton = {
+    lazy var comicNumberButton: XKCDButton = {
         let button = XKCDButton()
         button.setTitle("Go to Comic", for: .normal)
         
@@ -130,7 +143,7 @@ class ComicView: UIView {
         return button
     }()
     
-    public lazy var mostRecentComicButton: XKCDButton = {
+    lazy var mostRecentComicButton: XKCDButton = {
         let button = XKCDButton()
         button.setTitle("Recent", for: .normal)
         
@@ -189,6 +202,11 @@ class ComicView: UIView {
         comicNumberLabel.snp.makeConstraints {
             $0.top.equalTo(50)
             $0.centerX.equalToSuperview()
+        }
+        
+        toggleFavoriteButton.snp.makeConstraints {
+            $0.top.equalTo(comicNumberLabel)
+            $0.left.equalTo(comicNumberLabel.snp.right).offset(5)
         }
         
         comicTitleLabel.snp.makeConstraints {
@@ -276,6 +294,10 @@ class ComicView: UIView {
         guard let comicNumTextFieldInput = comicNumberTextField.text else { return }
         guard let selectedComicNumber = Int(comicNumTextFieldInput) else { return }
         delegate?.handleSelectedComicNumber(selectedComicNumber)
+    }
+    
+    @objc func handleToggleFavorite(_ sender: Any) {
+        delegate?.handleToggleFavorite()
     }
     
     // MARK:- Keyboard logic
