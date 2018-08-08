@@ -7,10 +7,15 @@ class ComicView: UIView {
     var comic: XKCDComic? {
         didSet {
             guard let comic = comic else { return }
-            comicNumberLabel.text = "#\(comic.num)"
-            comicTitleLabel.text = "\(comic.title)"
+            guard let isFavorite = delegate?.isFavorite else { return }
             
-            let url = URL(string: comic.img)!
+            let favoriteButtonImage = isFavorite ? "favorite" : "notfavorite"
+            toggleFavoriteButton.setImage(UIImage.init(named: favoriteButtonImage), for: .normal)
+            
+            comicNumberLabel.text = "#\(comic.num ?? 0)"
+            comicTitleLabel.text = "\(comic.title ?? "")"
+            
+            let url = URL(string: comic.img ?? "")!
             let data = try? Data(contentsOf: url)
             
             comicImageScrollView.zoomScale = 1.0
@@ -20,7 +25,7 @@ class ComicView: UIView {
                 comicImageView.image = UIImage.init(named: "the_general_problem")
             }
             
-            comicDateLabel.text = "\(comic.month)/\(comic.day)/\(comic.year)"
+            comicDateLabel.text = "\(comic.month ?? "")/\(comic.day ?? "")/\(comic.year ?? "")"
             
         }
     }
@@ -40,10 +45,7 @@ class ComicView: UIView {
     
     lazy var toggleFavoriteButton: UIButton = {
         let button = UIButton()
-        let buttonImage = UIImage.init(named: "notfavorite")
         button.addTarget(self, action: #selector(handleToggleFavorite(_:)), for: .touchUpInside)
-        button.setTitle("Favorite", for: .normal)
-        button.setImage(buttonImage, for: .normal)
         
         self.addSubview(button)
         return button

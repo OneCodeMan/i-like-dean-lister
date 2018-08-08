@@ -1,18 +1,28 @@
 import Foundation
 import UIKit
 
-struct XKCDComic: Decodable {
-    let month: String
-    let num: Int
-    let link: String
-    let year: String
-    let news: String
-    let safeTitle: String
-    let transcript: String
-    let alt: String
-    let img: String
-    let title: String
-    let day: String
+class XKCDComic: NSObject, Decodable, NSCoding {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(num ?? 0, forKey: "numNameKey")
+        aCoder.encode(title ?? "", forKey: "titleNameKey")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.title = aDecoder.decodeObject(forKey: "titleNameKey") as? String
+        self.num = aDecoder.decodeObject(forKey: "numNameKey") as? Int
+    }
+    
+    var month: String?
+    var num: Int?
+    var link: String?
+    var year: String?
+    var news: String?
+    var safeTitle: String?
+    var transcript: String?
+    var alt: String?
+    var img: String?
+    var title: String?
+    var day: String?
     
     private enum CodingKeys: String, CodingKey {
         case safeTitle = "safe_title"

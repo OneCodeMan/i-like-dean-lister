@@ -8,4 +8,5 @@ protocol ComicViewDelegate {
     func handleRandomClicked()
     func handleSelectedComicNumber(_ number: Int)
     func handleToggleFavorite()
+    var isFavorite: Bool {get set}
 }
