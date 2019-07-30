@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ComicViewController: UIViewController, ComicViewDelegate {
+class ComicViewController: UIViewController {
     
     var comicView = ComicView()
     let session = XKCDService.shared
@@ -14,12 +14,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         
         session.getMostRecentComic { currentComic in
             self.comicView.comic = currentComic
-        }
-        
-        comicView.delegate = self
-        
-        if let comic = comicView.comic {
-            isFavorite = UserDefaults.standard.savedComics().contains(comic) ? true : false
         }
         
     }
@@ -39,8 +33,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         
         session.getMostRecentComic { mostRecentComic in
             self.comicView.comic = mostRecentComic
-            
-            
         }
     }
     
@@ -49,8 +41,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         
         session.getPrevComic() { prevComic in
             self.comicView.comic = prevComic
-            
-            
         }
     }
     
@@ -59,8 +49,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
         
         session.getNextComic() { nextComic in
             self.comicView.comic = nextComic
-            
-            
         }
     }
     
@@ -82,25 +70,6 @@ class ComicViewController: UIViewController, ComicViewDelegate {
             
         }
         
-    }
-    
-    @objc func handleToggleFavorite() {
-        print("Favorite clicked")
-        
-        // UI Favorites
-        let favoriteImageName = isFavorite ? "notfavorite" : "favorite"
-        isFavorite = !isFavorite
-        comicView.toggleFavoriteButton.setImage(UIImage.init(named: favoriteImageName), for: .normal)
-        
-        // UserDefaults
-        guard let comic = self.comicView.comic else { return }
-
-        var comicList = UserDefaults.standard.savedComics()
-        comicList.append(comic)
-        let data = NSKeyedArchiver.archivedData(withRootObject: comicList)
-        UserDefaults.standard.set(data, forKey: UserDefaults.favoritedComicKey)
-        
-        print(UserDefaults.standard.savedComics())
     }
 
 

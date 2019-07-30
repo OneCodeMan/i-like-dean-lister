@@ -22,8 +22,6 @@
 		1670FD35210516DE004F8B38 /* UIFont+XKCDViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD34210516DE004F8B38 /* UIFont+XKCDViewer.swift */; };
 		1670FD37210516F2004F8B38 /* XKCDComic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD36210516F2004F8B38 /* XKCDComic.swift */; };
 		1670FD3B21051CC7004F8B38 /* XKCDAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670FD3A21051CC7004F8B38 /* XKCDAPIManager.swift */; };
-		16807DB9211B8EBC00CFD279 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16807DB8211B8EBC00CFD279 /* FavoritesController.swift */; };
-		16807DBF211B98EC00CFD279 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16807DBE211B98EC00CFD279 /* UserDefaults.swift */; };
 		2F0293EB6E0CACE69DFF94F2 /* Pods_XKCDViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A7B3120530143AE33F3301 /* Pods_XKCDViewerTests.framework */; };
 		CC3706D356B01EEF43981966 /* Pods_XKCDViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA761E7F139D4D80EEB3AC /* Pods_XKCDViewerUITests.framework */; };
 		F53979D7DE50E97D99C72A01 /* Pods_XKCDViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A02D00535E58FB9225D22 /* Pods_XKCDViewer.framework */; };
@@ -68,8 +66,6 @@
 		1670FD34210516DE004F8B38 /* UIFont+XKCDViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+XKCDViewer.swift"; sourceTree = "<group>"; };
 		1670FD36210516F2004F8B38 /* XKCDComic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDComic.swift; sourceTree = "<group>"; };
 		1670FD3A21051CC7004F8B38 /* XKCDAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDAPIManager.swift; sourceTree = "<group>"; };
-		16807DB8211B8EBC00CFD279 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
-		16807DBE211B98EC00CFD279 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = /Users/davegumba/Desktop/Dev/Swift/New/Projects5/XKCDViewer/XKCDViewer/extensions/UserDefaults.swift; sourceTree = "<absolute>"; };
 		41EA761E7F139D4D80EEB3AC /* Pods_XKCDViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XKCDViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A02D00535E58FB9225D22 /* Pods_XKCDViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XKCDViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		915B4BF8BBA7AAAAF0CD8C4E /* Pods-XKCDViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XKCDViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-XKCDViewer/Pods-XKCDViewer.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,7 +194,6 @@
 			children = (
 				1670FD01210515BE004F8B38 /* ComicViewController.swift */,
 				160C87E121091888000011E0 /* MainTabBarController.swift */,
-				16807DB8211B8EBC00CFD279 /* FavoritesController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -213,7 +208,6 @@
 		1670FD3121051609004F8B38 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				16807DBE211B98EC00CFD279 /* UserDefaults.swift */,
 				1670FD32210516D1004F8B38 /* UIColor+XKCDViewer.swift */,
 				1670FD34210516DE004F8B38 /* UIFont+XKCDViewer.swift */,
 			);
@@ -477,10 +471,8 @@
 				160C87E621091AB5000011E0 /* ComicDelegate.swift in Sources */,
 				160C87E221091888000011E0 /* MainTabBarController.swift in Sources */,
 				1670FD37210516F2004F8B38 /* XKCDComic.swift in Sources */,
-				16807DBF211B98EC00CFD279 /* UserDefaults.swift in Sources */,
 				1670FD35210516DE004F8B38 /* UIFont+XKCDViewer.swift in Sources */,
 				1670FD00210515BE004F8B38 /* AppDelegate.swift in Sources */,
-				16807DB9211B8EBC00CFD279 /* FavoritesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

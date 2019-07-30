@@ -7,10 +7,6 @@ class ComicView: UIView {
     var comic: XKCDComic? {
         didSet {
             guard let comic = comic else { return }
-            guard let isFavorite = delegate?.isFavorite else { return }
-            
-            let favoriteButtonImage = isFavorite ? "favorite" : "notfavorite"
-            toggleFavoriteButton.setImage(UIImage.init(named: favoriteButtonImage), for: .normal)
             
             comicNumberLabel.text = "#\(comic.num ?? 0)"
             comicTitleLabel.text = "\(comic.title ?? "")"
@@ -30,8 +26,6 @@ class ComicView: UIView {
         }
     }
     
-    var isFavorite: Bool?
-    
     // MARK:- View components
     lazy var comicNumberLabel: UILabel = {
         let label = UILabel()
@@ -41,14 +35,6 @@ class ComicView: UIView {
         
         self.addSubview(label)
         return label
-    }()
-    
-    lazy var toggleFavoriteButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(handleToggleFavorite(_:)), for: .touchUpInside)
-        
-        self.addSubview(button)
-        return button
     }()
     
     lazy var comicTitleLabel: UILabel = {
@@ -206,11 +192,6 @@ class ComicView: UIView {
             $0.centerX.equalToSuperview()
         }
         
-        toggleFavoriteButton.snp.makeConstraints {
-            $0.top.equalTo(comicNumberLabel)
-            $0.left.equalTo(comicNumberLabel.snp.right).offset(5)
-        }
-        
         comicTitleLabel.snp.makeConstraints {
             $0.top.equalTo(comicNumberLabel.snp.bottom).offset(5)
             $0.left.right.equalTo(0)
@@ -296,10 +277,6 @@ class ComicView: UIView {
         guard let comicNumTextFieldInput = comicNumberTextField.text else { return }
         guard let selectedComicNumber = Int(comicNumTextFieldInput) else { return }
         delegate?.handleSelectedComicNumber(selectedComicNumber)
-    }
-    
-    @objc func handleToggleFavorite(_ sender: Any) {
-        delegate?.handleToggleFavorite()
     }
     
     // MARK:- Keyboard logic
